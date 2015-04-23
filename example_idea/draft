@@ -1,0 +1,136 @@
+use autolayout of apple
+-----------------------
+BEM - Yandex
+
+layout
+
+components
+----------
+config auto-icon auto-id
+
+    h1#heading<Just Heading>
+    grid#grd-data.using-a-store
+    text#txt-user-name
+
+    layout 
+           h = horizontal
+           v = vertical
+
+           a = accordian
+           c = card
+           s = step
+
+    container element
+        - container(default)
+        - form
+        - fielset
+        - grid
+
+    element
+        - inputs*
+            - textbox
+            - checkbox
+            - radio
+            - input_text
+            - input_checkbox
+            - input_radio
+            - ...
+        - button
+        - head -> h1
+        - link
+
+    fusion element - two or more elements that tranforms when they sit together
+        - ex. {textbox.small}-{button} -> action type button
+        - ex. {label}-{textbox} -> another variation
+
+    modifier - variation
+        using "." to add predefined css classes for modifing an element
+        ext - { textbox.size-small }={textbox}
+        ext - { textbox.size-mini }
+
+        element-specific mod
+        global-specific mod
+
+    behavior/modifier - pipe something
+       list | filter:someThing 
+       fontsize
+       fontwidth
+       fontweight
+       validation
+
+block definition
+
+#search_block
+  {textfield#query-text}-{button#search}
+
+#tab_block
+  tab:[button#first-tab]-[button#second-tab]-[button#tab3]
+
+layouting
+        
+line : [container-element.name][layout][op-layout]:[|][-][{element#id.class}][-][|]
+     | [layout][behavior][container-element]
+
+** technical#business
+** should separate business logic from element
+
+    hori==:|-{button#test1.clas1.clas2}-{button#test2}-{button#test3}-|
+    card:|{button#test1.clas1.clas2(200)}-{button#test2}-{button#test3}-|
+    vert100():|-{datagrid#grid-test}-|
+    #grid-test << |-{htext#firstname(h=300,w=300)}-10-{hnum#salary}-|
+
+    H==:|-{container#con1}-{container#con2}-{container#con3}-|
+
+    container(horizontal):|-{header1#head("PAGE HEADER")}-|
+
+    form#frm(v):|-{textbox#firstname}-
+                  {textbox#lastname}-
+                  {datefield#birth-date}-
+                  {dropdown(m->male, f->female)#gender(m->male,f->female)}-
+                  {h:|-{button#save}-{button#cancel}-|}-|
+
+
+    pricehead#price / texthead#first-name / numhead -|
+    textfield#ttt1 / textfield#ttt2 / textfield#ttt3
+
+    searchfield#search
+    button#add-to-cart.icon-blanket
+    button#save.icon-save
+
+    |-button#add-|
+    |-button#create-|
+    |--|
+    |--|
+    |--|
+    |--|
+    |--|
+    |--|
+    |--|
+    |--|
+    
+    
+behaviour
+---------
+
+template
+--------
+
+///
+
+HTML as math
+
+operator: + = * / ^ & 
+
+Element
+- single line text -> slt
+- paragraph -> p
+- multiple choice -> multi-choice
+- section break -> sb
+- page break -> pb
+- dropdown -> dd
+- checkboxes -> ck
+- number -> num
+
+Component
+Behavior
+Module

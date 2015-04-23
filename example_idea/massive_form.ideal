@@ -1,0 +1,246 @@
+# concept
+# HTML element as a service or as a funciton
+#-- block definition
+BTEVMB - block type element variation modifier behavior
+
+
+@ at collection
+{ .. } # block
+<type> # specific type of collection or element
+% # mod modifier
+# # html id
+. # html class
++ plus # join element
+() calling fn 
+[] array list # list of option for dropdown ...
+* important multiply regexp # required field
+^ start_with regexp
+$ # state
+! warning, slient
+= equality
+---- # separtor
+- # strict to a side use with |
+? reqexp no or more help
+-> transistion direction
+<- transition direction
+` -- code command 
+_ # blank gap in table header
+/ -- # divider
+| -- filter , pass something to anther # column separate
+"" # string text of <p> or similar tag
+''
+;
+: delimiter, seperator key from value
+
+# definition of element
+["display_text"]<type|variabtion>element[opt]#name.class$state 
+    # examples
+     <animated[show,hide]>button#id.class$show
+     <animated("front","back")>button$readonly
+     button#test.class[ "Save" %animated(front, back) $readonly ]
+     (button readonly animated ("Save"))
+     "Save Text"@button#save.cls-save animated("Front", "Back")$readonly
+
+  say : I want to create a submit with "Save Text" button that animated when hover on it and change text to "Submit"
+     "Save Text"@animated("front", "back")button#btn-id
+     button#save.test( "Save Text" :animated("Save Text" | "Submit") )
+     button( "Save Text" :animated("Save Text" | "Submit") ){
+        txt = "Display Text";
+        
+     }
+
+$state = show / hide / disabled / enabled / readonly / on / off
+
+# def block
+<type|variation>[collections]#[block-name]{
+
+}
+
+<pointing>menu#right-menu-id{
+    @{"Home"$active icon<home>}
+    @{"Messages" icon<message>}
+    @{"Friend" icon<friend>}
+}
+
+# example of menu with sub-menu
+
+menu#menu-with-sub-menu-id{
+    <nolabled>textfield#search
+    --------------------------
+    "Home"(label) <home>icon
+    @menu{
+     "search".cls-src
+     "add".cls-add
+     "remove".cls-remove
+    }
+    "Browser" icon:list
+    "Message" icon:mail
+    "More" icon:'>' menu{
+                "Edit Profile" <edit>icon
+                "Chose Language" <glob>icon
+                "Account Setting" <setting>icon
+           }
+}
+menu#mprofile.test("Menu Profile"){
+    "Search"
+    -----
+    "Home"
+    menu{
+        "Search"
+        "Add"
+        "Remove"
+    }
+    "Browser" <list>icon
+    "Message" <mail>icon
+    "More" <list>icon menu{ 
+                        "*Edit* Profile"
+                        "Choose Language"
+                        "Account Setting"
+                        }
+}
+
+list{
+    "Apple"
+    "Orange"
+    "Pear"
+}
+
+Step{ "First Step" "Second" "xxxx" }
+
+image/circle( url(/test/xxx.jpg) ){ "The caption" }
+#---------------
+@menu#menu-icon{ <red start>icon <green lab>icon <yellow mail>icon }
+#---------------
+# basic
+@<sortable>table{
+   @header{ |-"Name" |-"Registration Date"-|-"E-mail Address"-|-"Premium Plan"-| }
+   # if not use strict dash it will align center
+   @rows{
+     | "name1" | 2015-03-17 | <text>icon "wxx@mail.com" | "Yes" |
+     | "name2" | 2015-03-17 | "fmsdf@mmadf.com"         | "No"  |
+     | "name2" | 2015-03-17 | "anmm@sdfsdf.com"         | "Yes" |
+   }
+}
+
+@table{
+   @header{ | _ | Name | "Registration Date" | "E-mail Address" | "Premium Plan" | } 
+   @rows(x y z){
+    | slider | column1 | column2 | column3 |
+    | _      | column1 | column2 | column3 |
+    | slider | column1 | column2 | column3 |
+   }
+   @footer{
+    | _ | button#approve button#approve-all | _ | <user>icon + button#add-user |
+   }
+}
+#---------------
+# Form
+# Basic form
+@form{
+   <"Name">textfield#firstname textfield#lastname <"Gender">dropdown#gender
+   <"State">dropdown#state[ :key => Tennessee, :key => Texas , :key => UTah ... ]
+   <"Biography">textarea#bio
+   @<"Account Info">groupfield{
+       <"Username">textfield*#username+<user>icon <"Password">textfield*#password+<lock>icon
+   }
+   @<"Import Setting" attatch header>groupfields{
+        "Would you like us to import your current settings ?"
+        ----
+        "Yes" radio.import
+        "No"  radio.import
+   }
+   @"Setting"groupfields{
+        "Privacy"
+        slide#is-allow-only$on "Allow Anyone to see my account"
+        slide#is-allow-all     "Allow only friend to see my account"
+        "Newsletter Subscriptions"
+        <simple>slide#top-post$off "Top Posts This Week"
+        <simple>slide#hot-deal$on  "Hot Deals"
+   }
+   checkbox "I agree to the [Terms of Service][http://linktotermofservicepage]."
+   button#register<"Register Account">
+
+}
+
+# tab is another type of menu
+@<tab>menu{
+    "Bio" @{}
+}
+
+collection = form / grid[16/8] / menu
+
+
+@[form]#general-block
+    textfield#firstname  textfield#lastname
+    datefield#birth-date
+    textfield#id-no
+    dropdown#client-type
+    dropdown#client-sub-type
+
+@[table]-client
+    text#firstname
+    text#lastname
+    date#birthdate
+
+@[tab]#tabs {
+    @general-block 
+    @client-block
+}
+
+@main{
+    @{#search-block textfield#query button#search}
+    @{#adv-search
+        dropdown#country-code
+        dropdown#country-code
+        dropdown#country-code
+        dropdown#country-code }
+    tab:{#tabs
+        fieldset:{#tab1
+            textfield#firstname.class  textfield#lastname
+            datefield#birth-date
+            textfield#id-no
+            dropdown#client-type
+            dropdown#client-sub-type
+        }
+        fielset:{#tab2
+            textfield#firstname  @{#verify-client-code 
+                                        textfield#client-code 
+                                        button#verify }
+            datefield#birth-date textfield#id-no
+            dropdown#client-type dropdown#client-sub-type
+        }
+    }
+}
+
+#-- layout
+    |-[client-block]-| # responsive client-block
+
+
+#-- behavior
+# given / when / and / then
+#
+#
+#
+#
+#
+#
+
+{%menu.vertical "Home" "About" }
+{%cards
+    image(/example.jpg)
+    $(profile-content)
+    -------
+    icon(right) $(vote) Votes
+}
+
+{@[type-of-block]%[block-modification]
+    [*prefix]element[%mod][#id][.class][$state]
+}
+
+button#x
+
+{button#test%text("XXXX") icon(start)}
+
+{:items 
+    {#breadcrum link#home / link#store / link#t-shirt } 
+}
